@@ -49,7 +49,7 @@ git push
 ---
 
 ### **Important Notes**
-1. **Adjust Repository Names**: If your repository name differs, replace `YOURPART1REPO` with the correct name in the commands.
+1. **Adjust Repository Names**: If your repository name  is obviously different! Replace `YOURPART1REPO` with the correct name in the commands.
 2. **Resolve Merge Conflicts**: If conflicts occur during the merge, Git will prompt you to resolve them manually before proceeding.
 3. **Test After Pulling**: After pulling the updates, verify that your code builds and runs as expected. This step helps confirm that the merge was successful and introduced no issues.
 
