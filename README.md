@@ -1,33 +1,108 @@
-# Assignment 1 Module 2: Auditing and Test Cases
+### **Assignment 1, Module 2: Auditing and Test Cases**
 
-Read through the giftcardreader.c program (and its accompanying header, giftcard.h) to get a feel for it. You should also try building and running it with the included examplefile.gft file, to see what its normal output is. You may find it helpful to use a debugger like gdb or lldb to step through the program as it executes.
-Take the time to become familiar with these types of debuggers, or use the tools of your choice. Either way, what you need to do at this point is go through the code, read it, and try and understand how it works. One thing that helps many is to write down how the different parts are connected, either via a visual diagram or text. 
+This assignment focuses on understanding and improving the security of a C program (`giftcardreader.c`) and its accompanying header file (`giftcard.h`). You will audit the program, identify flaws, and create test cases to expose them. Additionally, you'll remediate the identified issues and implement regression tests to ensure the fixes persist.
 
-There is also a Makefile included in the repository. You can use this to build the program by typing make.
+---
 
-You can also use the Makefile to run the (very minimal and incomplete) test suite (to which you will be adding more tests!) for the program by typing make test, which uses runtests.sh to run the gift card reader on the gift cards found in testcases/valid and testcases/invalid. 
-Take the time to understand what a makefile is, what runtests.sh does, and what a testcases/valid and testcases/invalid folder may contain. Again, a 'valid' test case, should be a test that works, as expected. As in, it's **valid**. An invalid test case results in an unexpected behavior by the program. As in, it's *invalid**. 
-While you may understand what causes the behavior, so it's 'expected behavior' for you. The classification is still 'unexpected behavior' from the viewpoint of the application itself. 
+### **Step 1: Understand the Program**
 
-The Make file will compile the following three binaries for you each time you run it:
+1. **Explore the Code**
+   - Read through `giftcardreader.c` and `giftcard.h` to understand how they work.
+   - Build and run the program with the included `examplefile.gft` to observe its normal behavior.
+   - Use a debugger such as **GDB** or **LLDB** to step through the program during execution. This helps uncover logic flaws or unexpected behaviors.
+     Feel free to use whatever debugger you prefer, but we strongly recommend using one so that you can more easily trace your work.
+     - **Definition**: A *debugger* is a tool that allows you to execute a program line by line, inspect variable values, and monitor program execution to identify bugs.
 
-giftcardreader.original - This is the giftcard reader without any modifications
-giftcardreader.asan - This executable has a compiler flag -fsanitize=address that tells the compiler to use the AddressSanitizer, a memory error detector.
-giftcardreader.ubsan - This has a compiler flag -fsanitize=undefined that tells the compiler to use the UndefinedBehaviorSanitizer, a fast undefined behavior detector. It helps detect undefined behavior issues like integer overflows, misaligned or null pointers, etc.
+2. **Diagram the Flow**
+   - Create a diagram or write a description showing how different parts of the code interact. This is not to submit, but part of a recommend process in understanding any type of codebase!
 
+3. **Using the Makefile**
+   - The provided **Makefile** simplifies the build process:
 
-For this part, your job will be to find some flaws in the program, and then create test cases (i.e., binary gift cards) that expose flaws in the program. Use these binaries to your advantage to identify potential flaws. This requires a considerable amount of work on your end tracing through the code (hence the usefulness of a debugger) to try and identify the issues. 
+     - **Run `make`**: Compiles the program.
+     - **Run `make test`**: Executes a minimal test suite using `runtests.sh`. This is a very minimal test suite, you should create additional tests! This script runs the gift card reader on files in `testcases/valid` and `testcases/invalid`.
+       - **Valid test case**: A test that works as expected.
+       - **Invalid test case**: A test that triggers unexpected behavior from the application.
 
-You should write (create):
+4. **Generated Binaries**
+   - The Makefile compiles three versions of the program:
+     - **`giftcardreader.original`**: Unmodified version of the program.
+     - **`giftcardreader.asan`**: Uses AddressSanitizer, a tool for detecting memory-related errors.
+       - **Definition**: AddressSanitizer flags memory issues like buffer overflows or use-after-free errors.
+     - **`giftcardreader.ubsan`**: Uses UndefinedBehaviorSanitizer, which detects undefined behavior (e.g., null pointer dereferencing, integer overflows).
+       - **Definition**: UndefinedBehaviorSanitizer helps identify actions that lead to unpredictable behavior in C/C++ programs.
 
-Two test cases, crash1.gft and crash2.gft, that cause the program to crash; each crash should have a different root cause. Make sure you understand the causes for your write-up. If your input gift card can crash the **original giftcard reader program** you get credit. The Asan and UBSAN binaries exist to help you spot potential crashes or risks. Just keep in mind, just because a compiler flag tells you there is an error, doesn't mean exploiting it will result in a crash, sometimes it results simply in unexpected behavior (and potential access). To get credit for remediation, you must at a MINIMUM ensure that the input gift card file that you used to create a crash no longer does. Sometimes a remediation is implemented poorly and creates a new risk, **you need to be mindful of this!**. To check if a program crashed, you will see a Segmentation (or other) fault. This can be verified checking the exit code of a program using $? on the terminal after your giftcardreader has finished executing. 
+---
 
-Think about why so many C/C++ programs 'return 0;' at the end of a function, this is our exit code. Zero implies typically everything is 'okay' a non-zero return tends to be due to an error of somekind.
+### **Step 2: Find and Document Flaws**
 
-One test case, hang.gft, that causes the program to loop infinitely. (Hint: you may want to examine the "animation" record type to find a bug that causes the program to loop infinitely.)
+1. **Identify Flaws**
+   - Audit the program to uncover issues using the provided binaries (`asan`, `ubsan`, `original`) and tools (such as a debugger).
+   - Use test cases to identify crashes or unexpected behavior. Employ debugging tools to trace the root causes of issues. Remember, you can go ahead and create giftcards of your own as an input here!
 
-A text file, part2.txt explaining the bug triggered by each of your three test cases.
+2. **Create Test Cases**
+   - Write the following test files to expose flaws in the program (label them exactly as below):
+     - **`crash1.gft`**: Triggers a crash with a unique root cause.
+     - **`crash2.gft`**: Triggers a crash with a different root cause.
+     - **`hang.gft`**: Causes the program to loop indefinitely. (Hint: Investigate the "animation" record type for bugs.)
+    
+     Think carefully about where to store them, see Step 1.3.
 
-To create your own test files, you may want to refer to the gengift.py and genanim.py programs, which are Python scripts that create gift card files of different types.
+3. **Understand Crash Indicators**
+   - A crash typically results in a **Segmentation Fault** or other fatal error. After running the program, check the exit code using the `echo $?` command:
+     - **0**: Indicates successful execution.
+     - **Non-zero**: Indicates an error occurred.
 
-Finally, fix the bugs that are triggered by your test cases, and verify that the program no longer crashes / hangs on your test cases. To make sure that these bugs don't come up again as the code evolves, have GitHub Actions automatically build and run the program in your test suite. You can do this by placing the new test cases in the testcases/valid or testcases/invalid directories (depending on whether the gift card reader should accept or reject them). Then have GitHub Actions run make test. Note that you do not need to run your tests on the unfixed version of the code---the tests are intended to verify that the code is fixed and prevent the bugs from being reintroduced in later versions (known as regression tests). You are showing that your fixes work, which means running your newly built code.
+4. **Document Findings**
+   - Create a text file (`part2.txt`) explaining the bugs triggered by each of your test cases:
+     - Root cause of the bug.
+     - Behavior observed during the crash/hang.
+     - Steps to reproduce the issue.
+     - Explain, clearly, why it works, what lines it addreses, how you found the error. Not knowing how to explain your findings will result in you having a very unpleasant time during your Assesment Quiz!
+
+---
+
+### **Step 3: Fix the Bugs**
+
+1. **Implement Fixes**
+   - Modify the program to prevent the bugs identified by your test cases.
+   - Verify that the fixed program does not crash or hang when run against the same test cases.
+
+2. **Regression Testing**
+   - Add your new test cases to the `testcases/valid` or `testcases/invalid` directories:
+     - **Valid Test Cases**: Inputs the program should handle correctly.
+     - **Invalid Test Cases**: Inputs that should trigger error handling (but not crashes).
+   - Update the test suite to include these cases.
+
+3. **Automate Testing**
+   - Use **GitHub Actions** to ensure that future changes do not reintroduce bugs:
+     - Set up a workflow to automatically run `make test` after every code change.
+     - Ensure the workflow uses the updated test suite to verify the fixes.
+
+---
+
+### **Additional Notes**
+
+- **Creating Test Files**
+  - Use the provided Python scripts (`gengift.py`, `genanim.py`) to create binary gift card files for testing.
+
+- **Exit Codes**
+  - Programs in C/C++ often return an exit code (`return 0;` or similar) at the end of execution. A non-zero exit code typically signals an error. Perhaps a good practice to also implement in other languages?
+
+- **Common Pitfalls**
+  - Not all flagged issues by AddressSanitizer or UndefinedBehaviorSanitizer will lead to crashes. However, they indicate potential vulnerabilities that warrant investigation.
+
+---
+
+### **Deliverables**
+1. Three test files (`crash1.gft`, `crash2.gft`, `hang.gft`) demonstrating unique flaws.
+2. A detailed bug report in `part2.txt`.
+3. Fixed source code with no crashes or hangs for the test cases.
+4. Updated test suite and GitHub Actions workflow for regression testing. 
+
+### Submission
+Submit this part on gradescope, make sure to push the `hw1p2handin` tag to your repository first with the following:
+
+    git tag -a -m "Completed hw1 part2." hw1p2handin
+    git push origin main
+    git push origin hw1p2handin
