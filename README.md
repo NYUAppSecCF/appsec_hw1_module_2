@@ -174,3 +174,28 @@ Submit this part on gradescope, make sure to push the `hw1p2handin` tag to your 
     git tag -a -m "Completed hw1 part2." hw1p2handin
     git push origin main
     git push origin hw1p2handin
+    
+## What to Submit
+
+To submit your code, please only submit a file called `git_link.txt` that contains the name of your repository to **Gradescope**.
+For example, if your repo is located at 'h<span>ttps:</span>//github.com/NYUAppSecCF/appsec-homework-1-module-1-exampleaccount', you would submit a text file named `git_link.txt` with only line that reads with <ins><b>only</b></ins> the following:
+
+    appsec-homework-1-exampleaccount
+
+Remember that <b>Gradescope is not instant</b>. Especially if we have to look into past GitHub action runs. We have a timeout set for 10 minutes, almost all well running code will complete within 5 minutes. Wait for it to complete or timeout before trying to re-run. 
+
+For ease of grading, we ask that you also submit copies of your writeups as part2.txt directly in Gradescope. Please ensure that these writeups are exact copies of the files from your repository, as we have implemented a check to verify the match. **It cannot be blank, this will cause a hash failure!**. For further details on the writeup requirements, please refer to the grading rubric available in Brightspace under the "Assignment Guideline" section.
+
+Your repository should contain:    
+* Module 1
+  * Your `.github/workflows/hello.yml`
+  * At least one signed commit
+  * Your modified C code `module1.c'
+  * Your commpiled `module1.nyu`
+* Module 2
+  * In `testcases/invalid`: `crash1.gft`, `crash2.gft`, and `hang.gft`.
+  * A text file named `part2.txt` that contains the bug descriptions
+    for each of the three test cases
+  * A GitHub Actions YML that runs your tests
+  * A commit with the fixed version of the code (if you like, this
+    commit can also contain the files mentioned above)
