@@ -168,7 +168,7 @@ As always, make sure you understand why we're doing this!
 3. Fixed source code with no crashes or hangs for the test cases.
 4. Updated test suite and GitHub Actions workflow for regression testing. 
 
-### ### Ready for Submission
+### Ready for Submission
 Submit this part on gradescope, make sure to push the `hw1p2handin` tag to your repository first with the following:
 
     git tag -a -m "Completed hw1 part2." hw1p2handin
