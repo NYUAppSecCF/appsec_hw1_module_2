@@ -2,6 +2,21 @@
 
 This assignment focuses on understanding and improving the security of a C program (`giftcardreader.c`) and its accompanying header file (`giftcard.h`). You will audit the program, identify flaws, and create test cases to expose them. Additionally, you'll remediate the identified issues and implement regression tests to ensure the fixes persist.
 
+---
+
+- [Step 0: Pulling in Your Code](#step-0-pulling-in-your-code)
+- [Step 1: Understand the Program](#step-1-understand-the-program)
+- [Step 2: Find and Document Flaws](#step-2-find-and-document-flaws)
+- [Step 3: Fix the Bugs](#step-3-fix-the-bugs)
+- [Additional Notes](#additional-notes)
+- [Deliverables](#deliverables)
+- [Submission](#submission)
+
+
+---
+
+Would you like me to modify and reformat the uploaded file with this table of contents?
+
 ### **Step 0: Pulling in Your Code**
 
 In this course, each module builds upon the work you completed in the previous module. This approach reinforces the importance of iterative development and allows you to refine your skills incrementally. The commands below are essential for integrating your progress from Module 1 into your current work. They ensure that you have access to the latest updates from your own repository so you can seamlessly continue with Module 2.
