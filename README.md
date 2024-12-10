@@ -2,6 +2,61 @@
 
 This assignment focuses on understanding and improving the security of a C program (`giftcardreader.c`) and its accompanying header file (`giftcard.h`). You will audit the program, identify flaws, and create test cases to expose them. Additionally, you'll remediate the identified issues and implement regression tests to ensure the fixes persist.
 
+### **Step 0: Pulling in Your Code**
+
+In this course, each module builds upon the work you completed in the previous module. This approach reinforces the importance of iterative development and allows you to refine your skills incrementally. The commands below are essential for integrating your progress from Module 1 into your current work. They ensure that you have access to the latest updates from your own repository so you can seamlessly continue with Module 2.
+
+---
+
+### **Why Is This Done?**
+1. **Build on Previous Work**: Each module assumes that you’ve completed the foundational tasks from the previous one. For instance, in Module 1, you set up your repository and implemented initial features. In Module 2, you will extend this by auditing the program, creating test cases, and implementing fixes.
+   
+2. **Version Control**: Git allows you to track changes and manage updates to your code efficiently. By pulling your previous work, you maintain a synchronized development environment.
+
+3. **Collaboration Readiness**: Even if you're working solo, you follow a similar workflow to collaborative projects, preparing you for real-world software development practices.
+
+---
+
+### **Commands Explanation and Verification**
+
+The following commands will pull your Module 1 work into your current repository for Module 2. Let’s break them down:
+
+```bash
+git remote add upstream https://github.com/NYUAppSecCF/appsec_hw1-YOURPART1REPO
+```
+- **Purpose**: Adds the remote repository URL for Module 1 as an additional "upstream" source.
+- **Why?**: You need a way to fetch changes from your previous work, and this command links the repository for Module 1 to your current project.
+- **Check**: Ensure the URL `https://github.com/NYUAppSecCF/appsec_hw1-YOURPART1REPO` matches the repository for your Module 1 code. Replace `YOURPART1REPO` with your actual repository name.
+
+```bash
+git fetch upstream
+```
+- **Purpose**: Downloads the changes from the `upstream` repository to your local Git environment.
+- **Why?**: This brings in the latest updates from Module 1 but does not automatically apply them yet.
+
+```bash
+git merge upstream/main --allow-unrelated-histories
+```
+- **Purpose**: Merges the `main` branch from your Module 1 repository into your current repository.
+- **Why?**: Since Module 1 and Module 2 repositories may have different histories, the `--allow-unrelated-histories` flag ensures that the merge proceeds without errors due to this difference.
+
+```bash
+git push
+```
+- **Purpose**: Uploads the merged changes to your remote repository for Module 2.
+- **Why?**: This ensures that your Module 2 repository reflects the updates from Module 1 and serves as your new starting point.
+
+---
+
+### **Important Notes**
+1. **Adjust Repository Names**: If your repository name differs, replace `YOURPART1REPO` with the correct name in the commands.
+2. **Resolve Merge Conflicts**: If conflicts occur during the merge, Git will prompt you to resolve them manually before proceeding.
+3. **Test After Pulling**: After pulling the updates, verify that your code builds and runs as expected. This step helps confirm that the merge was successful and introduced no issues.
+
+By following this process, you’ll be well-prepared to continue your work in Module 2 without losing the progress made in Module 1! Future modules will have you run through the same steps, so do not forget! 
+
+As always, make sure you understand why we're doing this!
+
 ---
 
 ### **Step 1: Understand the Program**
